@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const Team = require("./controllers/TeamController");
 const Player = require("./controllers/PlayerController");
+const Match = require("./controllers/MatchController");
 
 const app = express();
 require("./database/index");
@@ -19,6 +20,9 @@ app.get("/team", Team.createData);
 
 // PlayerController
 app.get("/player", Player.createData);
+
+// MatchController
+app.get("/match", Match.createData);
 
 // Listen 9090
 app.listen(9090, () => {
