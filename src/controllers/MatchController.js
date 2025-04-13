@@ -11,6 +11,7 @@ module.exports = {
       const data = await response.json();
       const currentMatches = data.events.map((match) => {
         return {
+          id: match.id,
           slug: match.slug,
           status: match.status.description,
           customId: match.customId,
@@ -28,8 +29,8 @@ module.exports = {
       console.log(matches.length);
     }
 
-    matches.forEach(async (player) => {
-      await Match.create({ ...player });
+    matches.forEach(async (match) => {
+      await Match.upsert({ ...match });
     });
 
     return res.json();

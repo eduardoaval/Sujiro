@@ -10,7 +10,7 @@ module.exports = {
     }
     const teams = await response.json();
     teams.standings[0].rows.forEach(async (team) => {
-      await Team.create({
+      await Team.upsert({
         id: team.team.id,
         name: team.team.name,
         slug: team.team.slug,

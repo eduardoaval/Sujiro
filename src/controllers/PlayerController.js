@@ -38,7 +38,7 @@ module.exports = {
     }
 
     players.forEach(async (player) => {
-      await Player.create({
+      await Player.upsert({
         id: player.id,
         name: player.name,
         slug: player.slug,
