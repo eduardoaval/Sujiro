@@ -20,7 +20,8 @@ app.use(
 app.get("/team", Team.createData);
 
 // PlayerController
-app.get("/player", Player.createData);
+app.get("/player", Player.getPlayers);
+app.get("/player/create", Player.createData);
 
 // MatchController
 app.get("/match", Match.createData);
