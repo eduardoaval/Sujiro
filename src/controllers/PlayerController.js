@@ -1,18 +1,44 @@
 const Player = require("../database/models/Player");
 const Team = require("../database/models/Team");
+const Rating = require("../database/models/SeasonRating");
+const Match = require("../database/models/Match");
 
 module.exports = {
   async getPlayers(req, res) {
+    const query = req.query;
     const players = await Player.findAll();
     const teams = await Team.findAll();
+    const ratings = await Rating.findAll();
+    const matches = await Match.findAll();
 
     const response = players.map((player) => {
       const team = teams.find((team) => team.id === player.teamId);
+      const orderRating = ratings
+        .filter((r) => r.playerId === player.id)
+        .map((r) => {
+          const match = matches.find((m) => m.id === r.matchId);
+          return {
+            ...r.dataValues,
+            match,
+          };
+        })
+        .sort((a, b) => {
+          return b.match.startTimestamp - a.match.startTimestamp;
+        });
+      const lastRating = orderRating[0];
+      let deltaRating = 0;
+
+      if (lastRating && orderRating[1]) {
+        deltaRating = lastRating.rating - orderRating[1].rating;
+        deltaRating = Number((Math.round(deltaRating * 100) / 100).toFixed(2));
+      }
       return {
         ...player.dataValues,
         team: {
           ...team.dataValues,
         },
+        lastRating,
+        deltaRating,
       };
     });
 
