@@ -65,7 +65,7 @@ module.exports = {
           id: player.player.id,
           name: player.player.name,
           slug: player.player.slug,
-          image: `https://img.sofascore.com/api/v1/player/${player.player.id}/image`,
+          image: `http://img.sofascore.com/api/v1/player/${player.player.id}/image`,
           teamId: player.team.id,
           rating: player.rating,
           userCount: player.player.userCount,

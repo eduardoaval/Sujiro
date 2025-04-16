@@ -18,7 +18,7 @@ module.exports = {
         gender: team.team.gender,
         nameCode: team.team.nameCode,
         country: team.team.country.name,
-        image: `https://img.sofascore.com/api/v1/team/${team.team.id}/image`,
+        image: `http://img.sofascore.com/api/v1/team/${team.team.id}/image`,
         teamColorPrimary: team.team.teamColors.primary,
         teamColorSecondary: team.team.teamColors.secondary,
         teamColorText: team.team.teamColors.text,

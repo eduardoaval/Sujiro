@@ -9,12 +9,8 @@ const app = express();
 require("./database/index");
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-    useCredentials: true,
-  })
-);
+app.use(cors());
+app.options("*", cors());
 
 // TeamController
 app.get("/team", Team.createData);
